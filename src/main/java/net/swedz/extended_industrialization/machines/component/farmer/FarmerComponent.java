@@ -87,12 +87,12 @@ public final class FarmerComponent implements IComponent
 	
 	private final List<FarmerListener<? extends Event>> listeners = Lists.newArrayList();
 	
+	private Level   level;
+	private boolean listenersRegistered = false;
+
 	public PlantingMode plantingMode;
 	public boolean      tilling;
-	
-	private Level        level;
-	private ShapeMatcher shapeMatcher;
-	
+
 	private int processTick;
 	
 	public FarmerComponent(MultiblockInventoryComponent inventory, IsActiveComponent isActive, PlantingMode defaultPlantingMode, FarmerProcessRates processRates)
@@ -209,12 +209,12 @@ public final class FarmerComponent implements IComponent
 	
 	public void registerListeners(Level level, ShapeMatcher shapeMatcher)
 	{
-		if(this.shapeMatcher != null)
+		if(listenersRegistered)
 		{
 			throw new IllegalStateException("There are already listeners registered on this FarmerComponent");
 		}
+		listenersRegistered = true;
 		this.level = level;
-		this.shapeMatcher = shapeMatcher;
 		for(FarmerListener listener : listeners)
 		{
 			EILocalizedListeners.INSTANCE.register(level, shapeMatcher.getSpannedChunks(), listener.eventClass(), listener.listener());
@@ -227,7 +227,7 @@ public final class FarmerComponent implements IComponent
 		{
 			EILocalizedListeners.INSTANCE.unregister(level, shapeMatcher.getSpannedChunks(), listener.eventClass(), listener.listener());
 		}
-		this.shapeMatcher = null;
+		this.listenersRegistered = false;
 	}
 	
 	@Override
