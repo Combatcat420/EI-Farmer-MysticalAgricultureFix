@@ -73,7 +73,7 @@ repositories {
 	}
 	maven {
 		name = "Blakebr0"
-		url = "https://maven.blakesmods.com/#/releases"
+		url = "https://maven.blakesmods.com/releases"
 		content {
 			// Cucumber
 			includeGroup "com.blakebr0.cucumber"
@@ -124,11 +124,11 @@ dependencies {
 	}
 
 	if (project.runtime_include_mystical_agriculture.toBoolean()) {
-		localImplementation "com.blakebr0.mysticalagriculture:MysticalAgriculture:${mystical_agriculture_version}"
 		localImplementation "com.blakebr0.cucumber:Cucumber:${cucumber_version}"
+		localImplementation "com.blakebr0.mysticalagriculture:MysticalAgriculture:${mystical_agriculture_version}"
 	} else {
-		compileOnly "com.blakebr0.mysticalagriculture:MysticalAgriculture:${mystical_agriculture_version}"
 		compileOnly "com.blakebr0.cucumber:Cucumber:${cucumber_version}"
+		compileOnly "com.blakebr0.mysticalagriculture:MysticalAgriculture:${mystical_agriculture_version}"
 	}
 }
 
@@ -367,8 +367,7 @@ tasks.withType(ProcessResources).configureEach {
 			emi_version_range                     : emi_version_range,
 			accessories_version_range             : accessories_version_range,
 			curios_version_range                  : curios_version_range,
-			mystical_agriculture_version_range	  : mystical_agriculture_version_range,
-			cucumber_version_range				  : cucumber_version_range
+			mystical_agriculture_version_range    : mystical_agriculture_version_range
 	]
 	inputs.properties replaceProperties
 

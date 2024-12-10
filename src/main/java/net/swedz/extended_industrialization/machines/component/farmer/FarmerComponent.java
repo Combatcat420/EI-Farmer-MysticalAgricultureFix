@@ -22,10 +22,10 @@ import net.swedz.extended_industrialization.machines.component.farmer.harvesting
 import net.swedz.extended_industrialization.machines.component.farmer.harvesting.HarvestableBehaviorHolder;
 import net.swedz.extended_industrialization.machines.component.farmer.harvesting.HarvestingContext;
 import net.swedz.extended_industrialization.machines.component.farmer.harvesting.harvestable.CropBlockHarvestable;
+import net.swedz.extended_industrialization.machines.component.farmer.harvesting.harvestable.MysticalAgricultureHarvestable;
 import net.swedz.extended_industrialization.machines.component.farmer.harvesting.harvestable.NetherWartHarvestable;
 import net.swedz.extended_industrialization.machines.component.farmer.harvesting.harvestable.SimpleTallCropHarvestable;
 import net.swedz.extended_industrialization.machines.component.farmer.harvesting.harvestable.TreeHarvestable;
-import net.swedz.extended_industrialization.machines.component.farmer.harvesting.harvestable.MysticalAgricultureHarvestable;
 import net.swedz.extended_industrialization.machines.component.farmer.planting.FarmerPlantable;
 import net.swedz.extended_industrialization.machines.component.farmer.planting.PlantableBehaviorHolder;
 import net.swedz.extended_industrialization.machines.component.farmer.planting.PlantingContext;
@@ -63,11 +63,12 @@ public final class FarmerComponent implements IComponent
 	{
 		registerPlantable(StandardFarmerPlantable::new);
 		registerPlantable(SpecialFarmerPlantable::new);
-
-		if (ModLoadedHelper.isLoaded("mysticalagriculture")) {
+		
+		if(ModLoadedHelper.isLoaded("mysticalagriculture"))
+		{
 			registerHarvestable(MysticalAgricultureHarvestable::new);
 		}
-
+		
 		registerHarvestable(CropBlockHarvestable::new);
 		registerHarvestable(NetherWartHarvestable::new);
 		registerHarvestable(SimpleTallCropHarvestable::new);
@@ -89,10 +90,10 @@ public final class FarmerComponent implements IComponent
 	
 	private Level   level;
 	private boolean listenersRegistered = false;
-
+	
 	public PlantingMode plantingMode;
 	public boolean      tilling;
-
+	
 	private int processTick;
 	
 	public FarmerComponent(MultiblockInventoryComponent inventory, IsActiveComponent isActive, PlantingMode defaultPlantingMode, FarmerProcessRates processRates)
